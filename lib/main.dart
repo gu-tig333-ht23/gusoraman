@@ -1,9 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'todo_list.dart'; // Import the TodoList class
 import 'add_activity.dart'; // Import the AddActivity class
 
 void main() {
-  runApp(MyApp());
+  runApp(
+    ChangeNotifierProvider(
+      create: (context) => TodoProvider(),
+      child: MyApp(),
+  ),
+);
 }
 
 class MyApp extends StatelessWidget {
