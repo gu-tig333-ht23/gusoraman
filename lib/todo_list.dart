@@ -1,12 +1,7 @@
 import 'package:flutter/material.dart';
 import 'add_activity.dart'; // Import the AddActivity class
 
-class TodoList extends StatefulWidget {
-  @override
-  State<TodoList> createState() => _TodoListState();
-}
-
-class _TodoListState extends State<TodoList> {
+class TodoList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -14,8 +9,8 @@ class _TodoListState extends State<TodoList> {
         title: Text('To-Do List'),
         backgroundColor: Color.fromARGB(255, 196, 188, 188)),
         body: Column(children:[
-          _taskview("Write a Book"),
-          _taskview("Eat food")
+          _task("Write a Book"),
+          _task("Eat food")
         ]),
         floatingActionButton: 
           FloatingActionButton(onPressed: () {
@@ -28,7 +23,7 @@ class _TodoListState extends State<TodoList> {
   }
 }
 
-Widget _taskview(String name, {bool isChecked = false}) {
+Widget _task(String name, {bool isChecked = false}) {
   return Container(
     decoration: BoxDecoration(
       border: Border(bottom: BorderSide(color: Colors.black, width: 0.5)),
@@ -75,15 +70,4 @@ Widget _buildCloseIcon() {
     padding: EdgeInsets.only(right: 10, bottom: 5),
     child: Icon(Icons.close),
   );
-}
-
-class Task {
-  String name;
-  bool isChecked;
-
-  Task(this.name, {this.isChecked = false});
-
-  void togglechecked() {
-    isChecked = !isChecked;
-  }
 }
