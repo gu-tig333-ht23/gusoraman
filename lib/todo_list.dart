@@ -12,12 +12,17 @@ class TodoItem {
 }
 
 class TodoProvider extends ChangeNotifier {
-  List<TodoItem> _tasks = [TodoItem(name: "Hello world")];
+  List<TodoItem> _tasks = [];
   List<TodoItem> get tasks => _tasks;
   void addTask(TodoItem task) {
     _tasks.add(task);
     notifyListeners();
-
+  }
+  void removeTask(int index) {
+    if (index >= 0 && index < _tasks.length) {
+      _tasks.removeAt(index);
+      notifyListeners();
+    }
   }
 }
 
@@ -32,7 +37,12 @@ class TodoList extends StatelessWidget {
         body: ListView.builder(
         itemCount: tasks.length,
         itemBuilder: (context, index) {
-          return _todo(tasks[index].name);
+          return _todo(
+            tasks[index].name,
+            onRemove: () {
+              Provider.of<TodoProvider>(context, listen: false).removeTask(index);
+            },
+          );
         },
         ),
         floatingActionButton: 
@@ -48,7 +58,7 @@ class TodoList extends StatelessWidget {
 
 // Själva _todo widget som visar allt i själva att göra UIn
 
-Widget _todo(String name, {bool isChecked = false}) {
+Widget _todo(String name, {bool isChecked = false, VoidCallback? onRemove}) {
   return Container(
     decoration: BoxDecoration(
       border: Border(bottom: BorderSide(color: Colors.black, width: 0.5)),
@@ -78,7 +88,10 @@ Widget _todo(String name, {bool isChecked = false}) {
         ),
         Padding(
           padding: EdgeInsets.only(right: 10, bottom: 5),
-          child: Icon(Icons.close),
+          child: IconButton(
+            icon: Icon(Icons.close),
+            onPressed: onRemove,
+          ),
         ),
       ],
     ),
