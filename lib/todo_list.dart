@@ -9,8 +9,8 @@ class TodoList extends StatelessWidget {
         title: Text('To-Do List'),
         backgroundColor: Color.fromARGB(255, 196, 188, 188)),
         body: Column(children:[
-          _task("Write a Book"),
-          _task("Eat food")
+          _todo("Write a Book"),
+          _todo("Eat food")
         ]),
         floatingActionButton: 
           FloatingActionButton(onPressed: () {
@@ -23,7 +23,7 @@ class TodoList extends StatelessWidget {
   }
 }
 
-Widget _task(String name, {bool isChecked = false}) {
+Widget _todo(String name, {bool isChecked = false}) {
   return Container(
     decoration: BoxDecoration(
       border: Border(bottom: BorderSide(color: Colors.black, width: 0.5)),
@@ -32,42 +32,30 @@ Widget _task(String name, {bool isChecked = false}) {
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        _buildCheckbox(isChecked),
-        _buildTaskName(name),
-        _buildCloseIcon(),
-      ],
-    ),
-  );
-}
-
-Widget _buildCheckbox(bool isChecked) {
-  return Padding(
-    padding: EdgeInsets.only(right: 5),
-    child: Checkbox(
-      value: isChecked,
-      onChanged: null,
-    ),
-  );
-}
-
-Widget _buildTaskName(String name) {
-  return Expanded(
-    child: Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(
-          name,
-          style: TextStyle(fontSize: 20),
+        Padding(
+          padding: EdgeInsets.only(right: 5),
+          child: Checkbox(
+            value: isChecked,
+            onChanged: null,
+          ),
+        ),
+        Expanded(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                name,
+                style: TextStyle(fontSize: 20),
+              ),
+            ],
+          ),
+        ),
+        Padding(
+          padding: EdgeInsets.only(right: 10, bottom: 5),
+          child: Icon(Icons.close),
         ),
       ],
     ),
-  );
-}
-
-Widget _buildCloseIcon() {
-  return Padding(
-    padding: EdgeInsets.only(right: 10, bottom: 5),
-    child: Icon(Icons.close),
   );
 }
