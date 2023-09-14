@@ -24,8 +24,8 @@ class AddActivity extends StatelessWidget {
                 ),
               ),
             ),
-            Padding(
-              padding: EdgeInsets.only(top:100),
+            ElevatedButton(
+              onPressed: () {},
               child: Text("+ Add"),
             )
           ],
