@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:template/todo_list.dart';
 
 class AddActivity extends StatelessWidget {
+  final TextEditingController _textEditingController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     var todoProvider = Provider.of<TodoProvider>(context, listen: false);
@@ -20,6 +21,7 @@ class AddActivity extends StatelessWidget {
                 width: 400.0,
                 height: 200.0,
                 child: TextFormField(
+                  controller: _textEditingController,
                   decoration: InputDecoration(
                     border: OutlineInputBorder(),
                     hintText: 'What are you going to do',
@@ -29,7 +31,8 @@ class AddActivity extends StatelessWidget {
             ),
             ElevatedButton(
               onPressed: () {
-                todoProvider.addTask(TodoItem(name: "New Task"));
+                final String taskName = _textEditingController.text.trim();
+                todoProvider.addTask(TodoItem(name: taskName));
               },
               child: Text("+ Add"),
             )
