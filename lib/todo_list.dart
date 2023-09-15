@@ -24,6 +24,13 @@ class TodoProvider extends ChangeNotifier {
       notifyListeners();
     }
   }
+
+  void toggleTask(int index) {
+    if (index >= 0 && index < _tasks.length) {
+      _tasks[index].isChecked = !_tasks[index].isChecked;
+      notifyListeners();
+    }
+  }
 }
 
 class TodoList extends StatelessWidget {
@@ -38,7 +45,9 @@ class TodoList extends StatelessWidget {
         itemCount: tasks.length,
         itemBuilder: (context, index) {
           return _todo(
-            tasks[index].name,
+            context: context,
+            task: tasks[index],
+            index: index,
             onRemove: () {
               Provider.of<TodoProvider>(context, listen: false).removeTask(index);
             },
@@ -58,7 +67,8 @@ class TodoList extends StatelessWidget {
 
 // Själva _todo widget som visar allt i själva att göra UIn
 
-Widget _todo(String name, {bool isChecked = false, VoidCallback? onRemove}) {
+Widget _todo({required BuildContext context, required TodoItem task, required int index, VoidCallback? onRemove}) {
+  Color textColor = task.isChecked ? Colors.grey : Colors.black;
   return Container(
     decoration: BoxDecoration(
       border: Border(bottom: BorderSide(color: Colors.black, width: 0.5)),
@@ -70,8 +80,10 @@ Widget _todo(String name, {bool isChecked = false, VoidCallback? onRemove}) {
         Padding(
           padding: EdgeInsets.only(right: 5),
           child: Checkbox(
-            value: isChecked,
-            onChanged: null,
+            value: task.isChecked,
+            onChanged: (newValue) {
+              Provider.of<TodoProvider>(context, listen: false).toggleTask(index);
+            },
           ),
         ),
         Expanded(
@@ -80,8 +92,8 @@ Widget _todo(String name, {bool isChecked = false, VoidCallback? onRemove}) {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                name,
-                style: TextStyle(fontSize: 20),
+                task.name,
+                style: TextStyle(fontSize: 20, color: textColor),
               ),
             ],
           ),
