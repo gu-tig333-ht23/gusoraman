@@ -38,6 +38,7 @@ class TodoProvider extends ChangeNotifier {
   }
 }
 
+//Själva huvudsidan som visar alla todo objekt
 class TodoList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -60,17 +61,22 @@ class TodoList extends StatelessWidget {
         },
         ),
         floatingActionButton: 
-          FloatingActionButton(onPressed: () {
+          FloatingActionButton(
+            backgroundColor: Colors.white,
+            onPressed: () {
             Navigator.push(
               context,
               MaterialPageRoute(builder: (context) => AddActivity()),
             );
-          }, child: Icon(Icons.add)),
+          }, child: Icon(
+            Icons.add,
+            color: Colors.black)),
     );
   }
 }
 
-// Själva _todo widget som visar allt i själva todo UIn
+// Själva _todo widget som representerar Todo som objekt
+ 
 
 Widget _todo({required BuildContext context, required TodoItem task, required int index, VoidCallback? onRemove}) {
   Color textColor = task.isChecked ? Colors.grey : Colors.black;

@@ -25,7 +25,12 @@ class AddActivity extends StatelessWidget {
                 child: TextFormField(
                   controller: _textEditingController,
                   decoration: InputDecoration(
-                    border: OutlineInputBorder(),
+                    border: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)
+                    ), 
+                    focusedBorder: OutlineInputBorder(
+                      borderSide: BorderSide(color: Colors.black), // Customize the focus color here.
+                      borderRadius: BorderRadius.all(Radius.circular(10.0)),
+                      ),
                     hintText: 'What are you going to do',
                   ),
                 ),
@@ -35,7 +40,15 @@ class AddActivity extends StatelessWidget {
               onPressed: () {
                 final String taskName = _textEditingController.text.trim();
                 todoProvider.addTask(TodoItem(name: taskName));
+                Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => TodoList()),
+            );
               },
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Colors.white,
+                foregroundColor: Colors.black,
+              ),
               child: Text("+ Add"),
             )
           ],
