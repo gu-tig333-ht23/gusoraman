@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'add_activity.dart'; // Import the AddActivity class
+import 'add_activity.dart'; 
 import 'package:provider/provider.dart';
 
 
@@ -14,6 +14,7 @@ class TodoItem {
 }
 
 //Själva provider klassen, där man har alla funktioner som ändrar tillståndet
+//Kanske en bra ide att separera denna här filen till två? 
 
 class TodoProvider extends ChangeNotifier {
   List<TodoItem> _tasks = [];

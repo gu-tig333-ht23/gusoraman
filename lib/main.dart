@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'todo_list.dart'; // Import the TodoList class
-import 'add_activity.dart'; // Import the AddActivity class
+import 'todo_list.dart'; 
+import 'add_activity.dart'; 
 
+
+// själva programmetskärna
 void main() {
   runApp(
     ChangeNotifierProvider(
