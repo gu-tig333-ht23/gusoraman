@@ -3,6 +3,8 @@ import 'add_activity.dart'; // Import the AddActivity class
 import 'package:provider/provider.dart';
 
 
+//klass objekt för en todo objekt
+
 class TodoItem {
   final String name;
   bool isChecked;
@@ -11,9 +13,12 @@ class TodoItem {
 
 }
 
+//Själva provider klassen, där man har alla funktioner som ändrar tillståndet
+
 class TodoProvider extends ChangeNotifier {
   List<TodoItem> _tasks = [];
   List<TodoItem> get tasks => _tasks;
+
   void addTask(TodoItem task) {
     _tasks.add(task);
     notifyListeners();
@@ -65,7 +70,7 @@ class TodoList extends StatelessWidget {
   }
 }
 
-// Själva _todo widget som visar allt i själva att göra UIn
+// Själva _todo widget som visar allt i själva todo UIn
 
 Widget _todo({required BuildContext context, required TodoItem task, required int index, VoidCallback? onRemove}) {
   Color textColor = task.isChecked ? Colors.grey : Colors.black;
@@ -80,6 +85,7 @@ Widget _todo({required BuildContext context, required TodoItem task, required in
         Padding(
           padding: EdgeInsets.only(right: 5),
           child: Checkbox(
+            activeColor: Colors.black,
             value: task.isChecked,
             onChanged: (newValue) {
               Provider.of<TodoProvider>(context, listen: false).toggleTask(index);
@@ -93,7 +99,11 @@ Widget _todo({required BuildContext context, required TodoItem task, required in
             children: [
               Text(
                 task.name,
-                style: TextStyle(fontSize: 20, color: textColor),
+                style: TextStyle(
+                  fontSize: 20, 
+                  color: textColor, 
+                  decoration: task.isChecked ? TextDecoration.lineThrough : TextDecoration.none,),
+                
               ),
             ],
           ),
@@ -101,7 +111,9 @@ Widget _todo({required BuildContext context, required TodoItem task, required in
         Padding(
           padding: EdgeInsets.only(right: 10, bottom: 5),
           child: IconButton(
-            icon: Icon(Icons.close),
+            icon: Icon(
+              Icons.close,
+              color: Colors.black),
             onPressed: onRemove,
           ),
         ),

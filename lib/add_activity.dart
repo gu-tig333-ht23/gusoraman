@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:template/todo_list.dart';
 
+//Själva klassen för att lägga till aktiviteter samt UIn för sidan
+
 class AddActivity extends StatelessWidget {
   final TextEditingController _textEditingController = TextEditingController();
   @override
