@@ -63,6 +63,9 @@ class TodoList extends StatelessWidget {
         },
         ),
         floatingActionButton: 
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
           FloatingActionButton(
             backgroundColor: Colors.white,
             onPressed: () {
@@ -72,10 +75,16 @@ class TodoList extends StatelessWidget {
             );
           }, child: Icon(
             Icons.add,
-            color: Colors.black)),
+            color: Colors.black,
+            ),
+          ),
+          FloatingActionButton(
+
+          ),
+        ],
+      ),
     );
   }
-}
 
 // Själva _todo widget som representerar Todo som objekt
  
