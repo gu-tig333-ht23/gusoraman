@@ -79,7 +79,7 @@ Widget _todo({required BuildContext context, required TodoItem task, required in
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         Padding(
-          padding: EdgeInsets.only(right: 5)
+          padding: EdgeInsets.only(right: 5),
           child: Checkbox(
             activeColor: Colors.white,
             checkColor: Colors.black,
