@@ -21,6 +21,12 @@ class TodoProvider extends ChangeNotifier {
 
   
 
+  void setFilter(FilterType filterType) {
+    _filterType = filterType;
+    notifyListeners();
+  }
+  
+
   void addTask(TodoItem task) {
     _tasks.add(task);
     notifyListeners();
@@ -38,6 +44,19 @@ class TodoProvider extends ChangeNotifier {
       notifyListeners();
     }
   }
+  
+  FilterType _filterType = FilterType.All;
+  FilterType get filtertype => _filterType;
+
+  List<TodoItem> getFilteredTasks() {
+    if (_filterType == FilterType.Checked) {
+      return _tasks.where((task) => task.isChecked).toList();
+    } else if (_filterType == FilterType.Unchecked) {
+      return _tasks.where((task) => !task.isChecked).toList();
+    } else {
+      return _tasks;
+    }
+}
 }
 
-
+enum FilterType {All, Checked, Unchecked}

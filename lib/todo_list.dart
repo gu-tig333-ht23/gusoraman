@@ -9,20 +9,23 @@ import 'providers.dart';
 
 //Själva huvudsidan som visar alla todo objekt
 class TodoList extends StatelessWidget {
+
   @override
   Widget build(BuildContext context) {
-    var tasks = Provider.of<TodoProvider>(context).tasks;
+    
+    var filteredTasks = Provider.of<TodoProvider>(context).getFilteredTasks();
+    
     return Scaffold(
       appBar: AppBar(
         title: Text('To-Do List'),
         backgroundColor: Theme.of(context).colorScheme.onPrimary),
         
         body: ListView.builder(
-        itemCount: tasks.length,
+        itemCount: filteredTasks.length,
         itemBuilder: (context, index) {
           return _todo(
             context: context,
-            task: tasks[index],
+            task: filteredTasks[index],
             index: index,
             onRemove: () {
               Provider.of<TodoProvider>(context, listen: false).removeTask(index);
@@ -66,7 +69,7 @@ class TodoList extends StatelessWidget {
  
 
 Widget _todo({required BuildContext context, required TodoItem task, required int index, VoidCallback? onRemove}) {
-  Color textColor = task.isChecked ? Colors.grey : Colors.black;
+  Color textColor = task.isChecked ? Colors.black : Colors.black;
   return Container(
     decoration: BoxDecoration(
       border: Border(bottom: BorderSide(color: Colors.black, width: 0.5)),
@@ -76,9 +79,10 @@ Widget _todo({required BuildContext context, required TodoItem task, required in
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         Padding(
-          padding: EdgeInsets.only(right: 5),
+          padding: EdgeInsets.only(right: 5)
           child: Checkbox(
-            activeColor: Colors.black,
+            activeColor: Colors.white,
+            checkColor: Colors.black,
             value: task.isChecked,
             onChanged: (newValue) {
               Provider.of<TodoProvider>(context, listen: false).toggleTask(index);

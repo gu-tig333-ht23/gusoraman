@@ -32,6 +32,7 @@ class AddActivity extends StatelessWidget {
                       ),
                     hintText: 'What are you going to do',
                   ),
+                  style: TextStyle(color: Colors.black),
                 ),
               ),
             ),
@@ -39,7 +40,7 @@ class AddActivity extends StatelessWidget {
               onPressed: () {
                 final String taskName = _textEditingController.text.trim();
                 todoProvider.addTask(TodoItem(name: taskName));
-                Navigator.push(
+                Navigator.pop(
                 context,
                 MaterialPageRoute(builder: (context) => TodoList()),
             );

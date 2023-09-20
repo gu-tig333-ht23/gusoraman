@@ -21,13 +21,22 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         useMaterial3: true,
         colorScheme: ColorScheme.fromSeed(
-          primary: Colors.white,
-          seedColor: Color.fromARGB(255, 255, 255, 255),
+          primary: Colors.black,
+          seedColor: Colors.black,
           brightness: Brightness.dark,
         ),
-        scaffoldBackgroundColor: Colors.white
+        scaffoldBackgroundColor: Colors.white,             
       ),
-      home: TodoList(),
+      home: Theme(
+        data: ThemeData(
+          appBarTheme: AppBarTheme(
+            backgroundColor: Colors.grey,
+            foregroundColor: Colors.black,
+             
+          ),
+        ),
+        child: TodoList(),
+      ),
     );
   }
 }
