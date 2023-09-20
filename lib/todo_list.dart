@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'add_activity.dart'; 
 import 'package:provider/provider.dart';
+import 'filtertask.dart';
 
 
 //klass objekt för en todo objekt
@@ -64,7 +65,7 @@ class TodoList extends StatelessWidget {
         ),
         floatingActionButton: 
         Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
           FloatingActionButton(
             backgroundColor: Colors.white,
@@ -79,12 +80,20 @@ class TodoList extends StatelessWidget {
             ),
           ),
           FloatingActionButton(
-
+            backgroundColor: Colors.white,
+            onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => FilterTask()),
+            );     
+            }, child: Icon(Icons.menu, 
+            color: Colors.black,)
           ),
         ],
       ),
     );
   }
+}
 
 // Själva _todo widget som representerar Todo som objekt
  
