@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:template/todo_list.dart';
+import 'package:template/providers.dart';
 
 //Själva klassen för att lägga till aktiviteter samt UIn för sidan
 
