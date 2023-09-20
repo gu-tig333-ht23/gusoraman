@@ -1,29 +1,75 @@
 import 'package:flutter/material.dart';
-import 'add_activity.dart'; // Import the AddActivity class
+import 'add_activity.dart'; 
+import 'package:provider/provider.dart';
+import 'filtertask.dart';
+import 'providers.dart';
 
+
+
+
+//Själva huvudsidan som visar alla todo objekt
 class TodoList extends StatelessWidget {
+
   @override
   Widget build(BuildContext context) {
+    
+    var filteredTasks = Provider.of<TodoProvider>(context).getFilteredTasks();
+    
     return Scaffold(
       appBar: AppBar(
         title: Text('To-Do List'),
-        backgroundColor: Color.fromARGB(255, 196, 188, 188)),
-        body: Column(children:[
-          _task("Write a Book"),
-          _task("Eat food")
-        ]),
+        backgroundColor: Theme.of(context).colorScheme.onPrimary),
+        
+        body: ListView.builder(
+        itemCount: filteredTasks.length,
+        itemBuilder: (context, index) {
+          return _todo(
+            context: context,
+            task: filteredTasks[index],
+            index: index,
+            onRemove: () {
+              Provider.of<TodoProvider>(context, listen: false).removeTask(index);
+            },
+          );
+        },
+        ),
         floatingActionButton: 
-          FloatingActionButton(onPressed: () {
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+          FloatingActionButton(
+            backgroundColor: Colors.white,
+            onPressed: () {
             Navigator.push(
               context,
               MaterialPageRoute(builder: (context) => AddActivity()),
             );
-          }, child: Icon(Icons.add)),
+          }, child: Icon(
+            Icons.add,
+            color: Colors.black,
+            ),
+          ),
+          FloatingActionButton(
+            backgroundColor: Colors.white,
+            onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => FilterTask()),
+            );     
+            }, child: Icon(Icons.menu, 
+            color: Colors.black,)
+          ),
+        ],
+      ),
     );
   }
 }
 
-Widget _task(String name, {bool isChecked = false}) {
+// Själva _todo widget som representerar Todo som objekt
+ 
+
+Widget _todo({required BuildContext context, required TodoItem task, required int index, VoidCallback? onRemove}) {
+  Color textColor = task.isChecked ? Colors.black : Colors.black;
   return Container(
     decoration: BoxDecoration(
       border: Border(bottom: BorderSide(color: Colors.black, width: 0.5)),
@@ -32,42 +78,43 @@ Widget _task(String name, {bool isChecked = false}) {
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        _buildCheckbox(isChecked),
-        _buildTaskName(name),
-        _buildCloseIcon(),
-      ],
-    ),
-  );
-}
-
-Widget _buildCheckbox(bool isChecked) {
-  return Padding(
-    padding: EdgeInsets.only(right: 5),
-    child: Checkbox(
-      value: isChecked,
-      onChanged: null,
-    ),
-  );
-}
-
-Widget _buildTaskName(String name) {
-  return Expanded(
-    child: Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(
-          name,
-          style: TextStyle(fontSize: 20),
+        Padding(
+          padding: EdgeInsets.only(right: 5),
+          child: Checkbox(
+            activeColor: Colors.white,
+            checkColor: Colors.black,
+            value: task.isChecked,
+            onChanged: (newValue) {
+              Provider.of<TodoProvider>(context, listen: false).toggleTask(index);
+            },
+          ),
+        ),
+        Expanded(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                task.name,
+                style: TextStyle(
+                  fontSize: 20, 
+                  color: textColor, 
+                  decoration: task.isChecked ? TextDecoration.lineThrough : TextDecoration.none,),
+                
+              ),
+            ],
+          ),
+        ),
+        Padding(
+          padding: EdgeInsets.only(right: 10, bottom: 5),
+          child: IconButton(
+            icon: Icon(
+              Icons.close,
+              color: Colors.black),
+            onPressed: onRemove,
+          ),
         ),
       ],
     ),
-  );
-}
-
-Widget _buildCloseIcon() {
-  return Padding(
-    padding: EdgeInsets.only(right: 10, bottom: 5),
-    child: Icon(Icons.close),
   );
 }

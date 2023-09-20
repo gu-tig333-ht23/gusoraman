@@ -1,12 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:template/todo_list.dart';
+import 'package:template/providers.dart';
+
+//Själva klassen för att lägga till aktiviteter samt UIn för sidan
 
 class AddActivity extends StatelessWidget {
+  final TextEditingController _textEditingController = TextEditingController();
   @override
   Widget build(BuildContext context) {
+    var todoProvider = Provider.of<TodoProvider>(context, listen: false);
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Color.fromARGB(255, 196, 188, 188),
-      ),
+      appBar: AppBar(),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
@@ -16,16 +21,34 @@ class AddActivity extends StatelessWidget {
               child: Container(
                 width: 400.0,
                 height: 200.0,
-                child: TextField(
+                child: TextFormField(
+                  controller: _textEditingController,
                   decoration: InputDecoration(
-                    border: OutlineInputBorder(),
+                    border: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)
+                    ), 
+                    focusedBorder: OutlineInputBorder(
+                      borderSide: BorderSide(color: Colors.black), // Customize the focus color here.
+                      borderRadius: BorderRadius.all(Radius.circular(10.0)),
+                      ),
                     hintText: 'What are you going to do',
                   ),
+                  style: TextStyle(color: Colors.black),
                 ),
               ),
             ),
-            Padding(
-              padding: EdgeInsets.only(top:100),
+            ElevatedButton(
+              onPressed: () {
+                final String taskName = _textEditingController.text.trim();
+                todoProvider.addTask(TodoItem(name: taskName));
+                Navigator.pop(
+                context,
+                MaterialPageRoute(builder: (context) => TodoList()),
+            );
+              },
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Colors.white,
+                foregroundColor: Colors.black,
+              ),
               child: Text("+ Add"),
             )
           ],
