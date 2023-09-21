@@ -7,7 +7,7 @@ import 'providers.dart';
 // själva programmetskärna
 void main() {
   TodoProvider state = TodoProvider();
-  state.fetchTodos();
+  state.fetchTodos;
   runApp(
     ChangeNotifierProvider(
       create: (context) => TodoProvider(),

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'dart:convert';
 import 'package:template/todo_list.dart';
 import 'package:template/providers.dart';
 
@@ -37,7 +38,7 @@ class AddActivity extends StatelessWidget {
               ),
             ),
             ElevatedButton(
-              onPressed: () {
+              onPressed: () async {
                 final String taskName = _textEditingController.text.trim();
                 todoProvider.addTask(TodoItem(title: taskName));
                 Navigator.pop(

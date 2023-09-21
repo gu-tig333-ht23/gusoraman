@@ -9,7 +9,7 @@ const String apiKey = 'ce618333-46e5-4823-882d-b4311a0ec7cd';
 
 
 class TodoItem {
-  final String? id;
+  String? id;
   final String title;
   bool done;
 
@@ -19,7 +19,7 @@ class TodoItem {
     return TodoItem(
       id: json['id'], 
       title: json['name'], 
-      done: json['done'] ?? false,);
+      done: json['done']);
   }
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{
@@ -68,10 +68,16 @@ class TodoProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  void addTask(TodoItem task) {
-    _tasks.add(task);
-    notifyListeners();
+  void addTask(TodoItem task) async {
+    
+    await http.post(Uri.parse('$ENDPOINT/todos?key=$apiKey'),
+    headers: {
+      'Content-Type':'application/json'
+    },
+    body: jsonEncode(task.toJson()),
+    );
   }
+
   void removeTask(int index) {
     if (index >= 0 && index < _tasks.length) {
       _tasks.removeAt(index);

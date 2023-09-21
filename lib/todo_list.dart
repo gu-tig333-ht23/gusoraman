@@ -14,7 +14,7 @@ class TodoList extends StatelessWidget {
   Widget build(BuildContext context) {
     
     var filteredTasks = Provider.of<TodoProvider>(context).getFilteredTasks();
-    
+    context.read<TodoProvider>().fetchTodos();
     return Scaffold(
       appBar: AppBar(
         title: Text('To-Do List'),
