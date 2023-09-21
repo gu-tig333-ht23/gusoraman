@@ -41,6 +41,7 @@ class TodoList extends StatelessWidget {
             backgroundColor: Colors.white,
             onPressed: () {
             Navigator.push(
+              
               context,
               MaterialPageRoute(builder: (context) => AddActivity()),
             );
@@ -69,7 +70,7 @@ class TodoList extends StatelessWidget {
  
 
 Widget _todo({required BuildContext context, required TodoItem task, required int index, VoidCallback? onRemove}) {
-  Color textColor = task.isChecked ? Colors.black : Colors.black;
+  Color textColor = task.done ? Colors.black : Colors.black;
   return Container(
     decoration: BoxDecoration(
       border: Border(bottom: BorderSide(color: Colors.black, width: 0.5)),
@@ -83,7 +84,7 @@ Widget _todo({required BuildContext context, required TodoItem task, required in
           child: Checkbox(
             activeColor: Colors.white,
             checkColor: Colors.black,
-            value: task.isChecked,
+            value: task.done,
             onChanged: (newValue) {
               Provider.of<TodoProvider>(context, listen: false).toggleTask(index);
             },
@@ -95,11 +96,11 @@ Widget _todo({required BuildContext context, required TodoItem task, required in
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                task.name,
+                task.title,
                 style: TextStyle(
                   fontSize: 20, 
                   color: textColor, 
-                  decoration: task.isChecked ? TextDecoration.lineThrough : TextDecoration.none,),
+                  decoration: task.done ? TextDecoration.lineThrough : TextDecoration.none,),
                 
               ),
             ],

@@ -39,7 +39,7 @@ class AddActivity extends StatelessWidget {
             ElevatedButton(
               onPressed: () {
                 final String taskName = _textEditingController.text.trim();
-                todoProvider.addTask(TodoItem(name: taskName));
+                todoProvider.addTask(TodoItem(title: taskName));
                 Navigator.pop(
                 context,
                 MaterialPageRoute(builder: (context) => TodoList()),
