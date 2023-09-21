@@ -19,7 +19,7 @@ class TodoItem {
     return TodoItem(
       id: json['id'], 
       title: json['title'] ?? 'untitled', 
-      done: json['done']);
+      done: json['done']?? false,);
   }
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{
@@ -91,14 +91,24 @@ class TodoProvider extends ChangeNotifier {
    notifyListeners();
 }
 
-
-
-  void toggleTask(int index) {
-    if (index >= 0 && index < _tasks.length) {
-      _tasks[index].done = !_tasks[index].done;
-      notifyListeners();
+  void toggleTask(TodoItem task) async {
+    final String? id = task.id;
+    if (id != null) {
+    final index = _tasks.indexWhere((tasks) => tasks.id == id);
+    if (index != -1) {
+      _tasks[index].done = !task.done;
     }
+    await http.put(
+        Uri.parse('$ENDPOINT/todos/$id?key=$apiKey'),
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: jsonEncode(_tasks[index].toJson()),
+      );
+   notifyListeners();
   }
+}
+
   
   FilterType _filterType = FilterType.All;
   FilterType get filtertype => _filterType;

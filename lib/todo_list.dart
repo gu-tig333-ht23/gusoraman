@@ -86,7 +86,7 @@ Widget _todo({required BuildContext context, required TodoItem task, required in
             checkColor: Colors.black,
             value: task.done,
             onChanged: (newValue) {
-              Provider.of<TodoProvider>(context, listen: false).toggleTask(index);
+              Provider.of<TodoProvider>(context, listen: false).toggleTask(task);;
             },
           ),
         ),
