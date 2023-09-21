@@ -18,7 +18,7 @@ class TodoItem {
   factory TodoItem.fromJson(Map<String, dynamic> json) {
     return TodoItem(
       id: json['id'], 
-      title: json['name'], 
+      title: json['name'] ?? 'Untitled', 
       done: json['done']);
   }
   Map<String, dynamic> toJson() {
