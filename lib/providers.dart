@@ -3,11 +3,13 @@ import 'package:provider/provider.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
+
+//Om nyckeln inte fungerar kan gå till apiftechkey.dart filen för att generara en ny nyckel
 const String ENDPOINT = 'https://todoapp-api.apps.k8s.gu.se'; 
 const String apiKey = 'ce618333-46e5-4823-882d-b4311a0ec7cd';
 
 
-
+//Själva klassen för todo
 class TodoItem {
   String? id;
   final String title;
@@ -41,6 +43,7 @@ class TodoProvider extends ChangeNotifier {
   List<TodoItem> _tasks = [];
   List<TodoItem> get tasks => _tasks;
 
+//Det är detta som gör att allt visas
   void fetchTodos() async {
     try {
     var tasks = await getTodos();
@@ -62,12 +65,14 @@ class TodoProvider extends ChangeNotifier {
     return jsonResponse.map((json) => TodoItem.fromJson(json)).toList();
   }
 
+//Sätter uppgifter
 
   void setFilter(FilterType filterType) {
     _filterType = filterType;
     notifyListeners();
   }
 
+//lägger till uppgifter
   void addTask(TodoItem task) async {
     
     await http.post(Uri.parse('$ENDPOINT/todos?key=$apiKey'),
@@ -78,9 +83,9 @@ class TodoProvider extends ChangeNotifier {
     );
   }
 
-
+//tar bort uppgifter
   void removeTask(TodoItem task) async {
-  final String? id = task.id; // Declare id variable
+  final String? id = task.id; 
   await http.delete(
         Uri.parse('$ENDPOINT/todos/$id?key=$apiKey'),
         headers: {
@@ -90,7 +95,7 @@ class TodoProvider extends ChangeNotifier {
   _tasks.removeWhere((tasks) => tasks.id == id);
    notifyListeners();
 }
-
+//Själva toggle funktioner genom api
   void toggleTask(TodoItem task) async {
     final String? id = task.id;
     if (id != null) {

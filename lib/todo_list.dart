@@ -19,7 +19,7 @@ class TodoList extends StatelessWidget {
       appBar: AppBar(
         title: Text('To-Do List'),
         backgroundColor: Theme.of(context).colorScheme.onPrimary),
-        
+        //visar själva uppgiftslistan
         body: ListView.builder(
         itemCount: filteredTasks.length,
         itemBuilder: (context, index) {
@@ -37,6 +37,7 @@ class TodoList extends StatelessWidget {
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
+          //knappen som leder till att lägga till en aktivitet 
           FloatingActionButton(
             backgroundColor: Colors.white,
             onPressed: () {
@@ -50,6 +51,7 @@ class TodoList extends StatelessWidget {
             color: Colors.black,
             ),
           ),
+          //Knappen som leder till filtersidan
           FloatingActionButton(
             backgroundColor: Colors.white,
             onPressed: () {
@@ -81,6 +83,7 @@ Widget _todo({required BuildContext context, required TodoItem task, required in
       children: [
         Padding(
           padding: EdgeInsets.only(right: 5),
+          //själva uin för checkboxen
           child: Checkbox(
             activeColor: Colors.white,
             checkColor: Colors.black,
@@ -106,6 +109,7 @@ Widget _todo({required BuildContext context, required TodoItem task, required in
             ],
           ),
         ),
+        //själva uin och knappen för att ta bort en uppgift
         Padding(
           padding: EdgeInsets.only(right: 10, bottom: 5),
           child: IconButton(
