@@ -42,17 +42,20 @@ class TodoItem {
 class TodoProvider extends ChangeNotifier {
   List<TodoItem> _tasks = [];
   List<TodoItem> get tasks => _tasks;
+  bool _todosFetched = false;
 
 //Det är detta som gör att allt visas
   void fetchTodos() async {
     try {
+      if (!_todosFetched) {
     var tasks = await getTodos();
     _tasks = tasks;
+    _todosFetched = true;
     notifyListeners();
-  } catch (e) {
+  }} catch (e) {
     // Error testing 
-    print('Error fetching todos: $e');
-  }
+      print('Error fetching todos: $e');
+    }
   }
   
    Future<List<TodoItem>> getTodos() async {
@@ -81,6 +84,8 @@ class TodoProvider extends ChangeNotifier {
     },
     body: jsonEncode(task.toJson()),
     );
+    _todosFetched = false;
+    notifyListeners();
   }
 
 //tar bort uppgifter

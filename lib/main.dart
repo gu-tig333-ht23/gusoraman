@@ -7,13 +7,13 @@ import 'providers.dart';
 // själva programmetskärna
 void main() {
   TodoProvider state = TodoProvider();
-  state.fetchTodos;
   runApp(
     ChangeNotifierProvider(
-      create: (context) => TodoProvider(),
+      create: (context) => state,
       child: MyApp(),
   ),
 );
+  state.fetchTodos();
 }
 
 class MyApp extends StatelessWidget {
