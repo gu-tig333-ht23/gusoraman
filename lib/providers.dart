@@ -18,7 +18,7 @@ class TodoItem {
   factory TodoItem.fromJson(Map<String, dynamic> json) {
     return TodoItem(
       id: json['id'], 
-      title: json['name'] ?? 'Untitled', 
+      title: json['title'] ?? 'untitled', 
       done: json['done']);
   }
   Map<String, dynamic> toJson() {
@@ -78,12 +78,20 @@ class TodoProvider extends ChangeNotifier {
     );
   }
 
-  void removeTask(int index) {
-    if (index >= 0 && index < _tasks.length) {
-      _tasks.removeAt(index);
-      notifyListeners();
-    }
-  }
+
+  void removeTask(TodoItem task) async {
+  final String? id = task.id; // Declare id variable
+  await http.delete(
+        Uri.parse('$ENDPOINT/todos/$id?key=$apiKey'),
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      );
+  _tasks.removeWhere((tasks) => tasks.id == id);
+   notifyListeners();
+}
+
+
 
   void toggleTask(int index) {
     if (index >= 0 && index < _tasks.length) {

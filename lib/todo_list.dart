@@ -28,7 +28,7 @@ class TodoList extends StatelessWidget {
             task: filteredTasks[index],
             index: index,
             onRemove: () {
-              Provider.of<TodoProvider>(context, listen: false).removeTask(index);
+              Provider.of<TodoProvider>(context, listen: false).removeTask(filteredTasks[index]);
             },
           );
         },
