@@ -52,17 +52,16 @@ class TodoProvider extends ChangeNotifier {
   }
   }
   
-  Future<List<TodoItem>> getTodos() async {
+   Future<List<TodoItem>> getTodos() async {
     print('Testing API');
     http.Response response = await http.get(Uri.parse('$ENDPOINT/todos?key=$apiKey'));
     String body = response.body;
     print(body);
-    Map<String, dynamic> jsonResponse = jsonDecode(body);
-    List todoJson = jsonResponse['task'];
-    print("suceess");
-    print(todoJson.length);
-    return [];
+    List<dynamic> jsonResponse = jsonDecode(body);
+    print("sucess");
+    return jsonResponse.map((json) => TodoItem.fromJson(json)).toList();
   }
+
 
   void setFilter(FilterType filterType) {
     _filterType = filterType;
