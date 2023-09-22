@@ -16,6 +16,8 @@ void main() {
   state.fetchTodos();
 }
 
+
+// Kommern nog göra om detta och göra themes en egen fil för bättre strukturerard kod
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
