@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'providers.dart';
 
+//Själva sidan för filter
+
 class FilterTask extends StatelessWidget {
   @override
   Widget build(BuildContext context) {

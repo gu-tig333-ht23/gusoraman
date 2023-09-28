@@ -6,14 +6,18 @@ import 'providers.dart';
 
 // själva programmetskärna
 void main() {
+  TodoProvider state = TodoProvider();
   runApp(
     ChangeNotifierProvider(
-      create: (context) => TodoProvider(),
+      create: (context) => state,
       child: MyApp(),
   ),
 );
+  state.fetchTodos();
 }
 
+
+// Kommern nog göra om detta och göra themes en egen fil för bättre strukturerard kod
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {

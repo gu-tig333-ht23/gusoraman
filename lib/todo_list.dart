@@ -14,12 +14,12 @@ class TodoList extends StatelessWidget {
   Widget build(BuildContext context) {
     
     var filteredTasks = Provider.of<TodoProvider>(context).getFilteredTasks();
-    
+    context.read<TodoProvider>().fetchTodos();
     return Scaffold(
       appBar: AppBar(
         title: Text('To-Do List'),
         backgroundColor: Theme.of(context).colorScheme.onPrimary),
-        
+        //visar själva uppgiftslistan
         body: ListView.builder(
         itemCount: filteredTasks.length,
         itemBuilder: (context, index) {
@@ -28,7 +28,7 @@ class TodoList extends StatelessWidget {
             task: filteredTasks[index],
             index: index,
             onRemove: () {
-              Provider.of<TodoProvider>(context, listen: false).removeTask(index);
+              Provider.of<TodoProvider>(context, listen: false).removeTask(filteredTasks[index]);
             },
           );
         },
@@ -37,10 +37,12 @@ class TodoList extends StatelessWidget {
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
+          //knappen som leder till att lägga till en aktivitet 
           FloatingActionButton(
             backgroundColor: Colors.white,
             onPressed: () {
             Navigator.push(
+              
               context,
               MaterialPageRoute(builder: (context) => AddActivity()),
             );
@@ -49,6 +51,7 @@ class TodoList extends StatelessWidget {
             color: Colors.black,
             ),
           ),
+          //Knappen som leder till filtersidan
           FloatingActionButton(
             backgroundColor: Colors.white,
             onPressed: () {
@@ -69,7 +72,7 @@ class TodoList extends StatelessWidget {
  
 
 Widget _todo({required BuildContext context, required TodoItem task, required int index, VoidCallback? onRemove}) {
-  Color textColor = task.isChecked ? Colors.black : Colors.black;
+  Color textColor = task.done ? Colors.black : Colors.black;
   return Container(
     decoration: BoxDecoration(
       border: Border(bottom: BorderSide(color: Colors.black, width: 0.5)),
@@ -80,12 +83,13 @@ Widget _todo({required BuildContext context, required TodoItem task, required in
       children: [
         Padding(
           padding: EdgeInsets.only(right: 5),
+          //själva uin för checkboxen
           child: Checkbox(
             activeColor: Colors.white,
             checkColor: Colors.black,
-            value: task.isChecked,
+            value: task.done,
             onChanged: (newValue) {
-              Provider.of<TodoProvider>(context, listen: false).toggleTask(index);
+              Provider.of<TodoProvider>(context, listen: false).toggleTask(task);;
             },
           ),
         ),
@@ -95,16 +99,17 @@ Widget _todo({required BuildContext context, required TodoItem task, required in
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                task.name,
+                task.title,
                 style: TextStyle(
                   fontSize: 20, 
                   color: textColor, 
-                  decoration: task.isChecked ? TextDecoration.lineThrough : TextDecoration.none,),
+                  decoration: task.done ? TextDecoration.lineThrough : TextDecoration.none,),
                 
               ),
             ],
           ),
         ),
+        //själva uin och knappen för att ta bort en uppgift
         Padding(
           padding: EdgeInsets.only(right: 10, bottom: 5),
           child: IconButton(
