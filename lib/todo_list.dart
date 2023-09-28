@@ -17,7 +17,8 @@ class TodoList extends StatelessWidget {
     context.read<TodoProvider>().fetchTodos();
     return Scaffold(
       appBar: AppBar(
-        title: Text('To-Do List'),
+        title: Text('ToDo List'),
+        centerTitle: true,
         backgroundColor: Theme.of(context).appBarTheme.backgroundColor),
         //visar själva uppgiftslistan
         body: ListView.builder(
@@ -39,7 +40,7 @@ class TodoList extends StatelessWidget {
           children: [
           //knappen som leder till att lägga till en aktivitet 
           FloatingActionButton(
-            backgroundColor: Colors.white,
+            backgroundColor: Theme.of(context).appBarTheme.backgroundColor,
             onPressed: () {
             Navigator.push(
               
@@ -53,7 +54,7 @@ class TodoList extends StatelessWidget {
           ),
           //Knappen som leder till filtersidan
           FloatingActionButton(
-            backgroundColor: Colors.white,
+            backgroundColor: Theme.of(context).appBarTheme.backgroundColor,
             onPressed: () {
             Navigator.push(
               context,

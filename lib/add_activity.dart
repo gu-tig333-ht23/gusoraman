@@ -11,7 +11,10 @@ class AddActivity extends StatelessWidget {
   Widget build(BuildContext context) {
     var todoProvider = Provider.of<TodoProvider>(context, listen: false);
     return Scaffold(
-      appBar: AppBar(),
+      appBar: AppBar(
+      title: Text('ToDo List'),
+      centerTitle: true,
+      backgroundColor: Theme.of(context).appBarTheme.backgroundColor),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,

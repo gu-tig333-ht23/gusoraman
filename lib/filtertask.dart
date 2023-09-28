@@ -7,14 +7,11 @@ import 'providers.dart';
 class FilterTask extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Theme(
-      data: ThemeData(appBarTheme: 
-      AppBarTheme(
-        backgroundColor: Colors.white,
-        foregroundColor: Colors.black,)),
-      child: Scaffold(
+    return Scaffold(
       appBar: AppBar(
-        title: Text('Filter Tasks'),
+      backgroundColor: Theme.of(context).appBarTheme.backgroundColor,
+      title: Text('ToDo List'),
+      centerTitle: true,
       ),
       body: Center(
         child: Column(
@@ -53,7 +50,6 @@ class FilterTask extends StatelessWidget {
           ],
         ),
       ),
-    ),
-  );
-}
+    );
+  }
 }
