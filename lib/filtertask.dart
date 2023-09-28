@@ -24,9 +24,11 @@ class FilterTask extends StatelessWidget {
                 Navigator.pop(context);
               },
               style: ElevatedButton.styleFrom(
-              backgroundColor: Colors.black,),
-              child: Text('Show done tasks'),
+              foregroundColor:Theme.of(context).appBarTheme.foregroundColor,
+              backgroundColor: Theme.of(context).appBarTheme.backgroundColor,),
+              child: Text('Show done tasks'),           
             ),
+            SizedBox(height: 15.0),
             ElevatedButton(
               onPressed: () {
                 // Filter för oklara tasks
@@ -34,9 +36,11 @@ class FilterTask extends StatelessWidget {
                 Navigator.pop(context);
               },
               style: ElevatedButton.styleFrom(
-              backgroundColor: Colors.black,),
+              foregroundColor:Theme.of(context).appBarTheme.foregroundColor,
+              backgroundColor: Theme.of(context).appBarTheme.backgroundColor,),
               child: Text('Show unfinished tasks'),
             ),
+            SizedBox(height: 15.0),
             ElevatedButton(
               onPressed: () {
                 // Tar bort filter
@@ -44,9 +48,11 @@ class FilterTask extends StatelessWidget {
                 Navigator.pop(context); 
               },
               style: ElevatedButton.styleFrom(
-              backgroundColor: Colors.black,),
+              foregroundColor:Theme.of(context).appBarTheme.foregroundColor,
+              backgroundColor:Theme.of(context).appBarTheme.backgroundColor),
               child: Text('Show all tasks'),
             ),
+            SizedBox(height: 15.0),
           ],
         ),
       ),
