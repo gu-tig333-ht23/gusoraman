@@ -71,11 +71,10 @@ class TodoList extends StatelessWidget {
   }
 }
 
-// Själva _todo widget som representerar Todo som objekt
+// Själva _todo widget som representerar Todo som objekt, samt checkboxen och krysset
  
 
 Widget _todo({required BuildContext context, required TodoItem task, required int index, VoidCallback? onRemove}) {
-  Color textColor = task.done ? Colors.black : Colors.black;
   return Container(
     decoration: BoxDecoration(
       border: Border(bottom: BorderSide(color: Colors.black, width: 0.5)),
@@ -107,9 +106,14 @@ Widget _todo({required BuildContext context, required TodoItem task, required in
                 task.title,
                 style: TextStyle(
                   fontSize: 20, 
-                  color: textColor, 
-                  decoration: task.done ? TextDecoration.lineThrough : TextDecoration.none,),
-                
+                  color: task.done
+                  ? Theme.of(context).colorScheme.secondary
+                  : Theme.of(context).colorScheme.secondary,
+                  decoration: task.done ? TextDecoration.lineThrough : TextDecoration.none,
+                  decorationColor: task.done
+                  ? Theme.of(context).colorScheme.secondary
+                  : Theme.of(context).colorScheme.secondary)
+                  ,   
               ),
             ],
           ),
@@ -120,7 +124,7 @@ Widget _todo({required BuildContext context, required TodoItem task, required in
           child: IconButton(
             icon: Icon(
               Icons.close,
-              color: Colors.black),
+              color: Theme.of(context).colorScheme.secondary),
             onPressed: onRemove,
           ),
         ),
