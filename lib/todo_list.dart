@@ -41,6 +41,7 @@ class TodoList extends StatelessWidget {
           //knappen som leder till att lägga till en aktivitet 
           FloatingActionButton(
             backgroundColor: Theme.of(context).appBarTheme.backgroundColor,
+            shape: CircleBorder(),
             onPressed: () {
             Navigator.push(
               
@@ -49,19 +50,20 @@ class TodoList extends StatelessWidget {
             );
           }, child: Icon(
             Icons.add,
-            color: Colors.black,
+            color: Theme.of(context).colorScheme.primary,
             ),
           ),
           //Knappen som leder till filtersidan
           FloatingActionButton(
             backgroundColor: Theme.of(context).appBarTheme.backgroundColor,
+            shape: CircleBorder(),
             onPressed: () {
             Navigator.push(
               context,
               MaterialPageRoute(builder: (context) => FilterTask()),
             );     
             }, child: Icon(Icons.menu, 
-            color: Colors.black,)
+            color: Theme.of(context).colorScheme.primary,)
           ),
         ],
       ),
