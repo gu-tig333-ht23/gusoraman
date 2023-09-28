@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'todo_list.dart'; 
+import 'todo_list.dart';
 import 'providers.dart';
+import 'theme.dart';
 
 
 // själva programmetskärna
@@ -22,25 +23,8 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(   
-      theme: ThemeData(
-        useMaterial3: true,
-        colorScheme: ColorScheme.fromSeed(
-          primary: Colors.black,
-          seedColor: Colors.black,
-          brightness: Brightness.dark,
-        ),
-        scaffoldBackgroundColor: Colors.white,             
-      ),
-      home: Theme(
-        data: ThemeData(
-          appBarTheme: AppBarTheme(
-            backgroundColor: Colors.grey,
-            foregroundColor: Colors.black,
-             
-          ),
-        ),
-        child: TodoList(),
-      ),
-    );
+      theme: UiTheme.myTheme(),
+      home: TodoList(),
+      );
+    }
   }
-}

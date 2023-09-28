@@ -18,7 +18,7 @@ class TodoList extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text('To-Do List'),
-        backgroundColor: Theme.of(context).colorScheme.onPrimary),
+        backgroundColor: Theme.of(context).appBarTheme.backgroundColor),
         //visar själva uppgiftslistan
         body: ListView.builder(
         itemCount: filteredTasks.length,
