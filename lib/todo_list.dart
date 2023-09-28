@@ -88,12 +88,14 @@ Widget _todo({required BuildContext context, required TodoItem task, required in
           padding: EdgeInsets.only(right: 5),
           //själva uin för checkboxen
           child: Checkbox(
-            activeColor: Colors.white,
-            checkColor: Colors.black,
+            activeColor: Theme.of(context).colorScheme.primary,
+            checkColor: Theme.of(context).colorScheme.secondary,
             value: task.done,
             onChanged: (newValue) {
-              Provider.of<TodoProvider>(context, listen: false).toggleTask(task);;
+              Provider.of<TodoProvider>(context, listen: false).toggleTask(task);
             },
+            visualDensity: VisualDensity.compact,
+            side: BorderSide(color: Theme.of(context).colorScheme.secondary)
           ),
         ),
         Expanded(
