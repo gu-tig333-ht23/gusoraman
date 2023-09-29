@@ -9,6 +9,8 @@ import 'apiproviders.dart';
 
 //Själva huvudsidan som visar alla todo objekt
 class TodoList extends StatelessWidget {
+  const TodoList({super.key});
+
 
   @override
   Widget build(BuildContext context) {

@@ -5,6 +5,8 @@ import 'apiproviders.dart';
 //Själva sidan för filter
 
 class FilterTask extends StatelessWidget {
+  const FilterTask({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

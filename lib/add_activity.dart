@@ -7,6 +7,8 @@ import 'package:template/apiproviders.dart';
 
 class AddActivity extends StatelessWidget {
   final TextEditingController _textEditingController = TextEditingController();
+
+  AddActivity({super.key});
   @override
   Widget build(BuildContext context) {
     var todoProvider = Provider.of<TodoProvider>(context, listen: false);
@@ -21,7 +23,7 @@ class AddActivity extends StatelessWidget {
           children: [
             Padding(
               padding: const EdgeInsets.all(20.0),
-              child: Container(
+              child: SizedBox(
                 width: 400.0,
                 height: 200.0,
                 child: TextFormField(
