@@ -38,7 +38,7 @@ class FilterTask extends StatelessWidget {
               style: ElevatedButton.styleFrom(
               foregroundColor:Theme.of(context).appBarTheme.foregroundColor,
               backgroundColor: Theme.of(context).appBarTheme.backgroundColor,),
-              child: Text('Show unfinished tasks'),
+              child: Text('Show undone tasks'),
             ),
             SizedBox(height: 15.0),
             ElevatedButton(
