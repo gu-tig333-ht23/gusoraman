@@ -35,8 +35,7 @@ class TodoItem {
   }
 
 
-//Själva provider klassen, där man har alla funktioner som ändrar tillståndet
-//Kanske en bra ide att separera denna här filen till två? 
+//Själva provider och api klassen, där man har alla funktioner som ändrar tillståndet
 
 class TodoProvider extends ChangeNotifier {
   List<TodoItem> _tasks = [];
