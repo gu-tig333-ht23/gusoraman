@@ -2,24 +2,26 @@ import 'package:flutter/material.dart';
 import 'add_activity.dart'; 
 import 'package:provider/provider.dart';
 import 'filtertask.dart';
-import 'providers.dart';
+import 'apiproviders.dart';
 
 
 
 
 //Själva huvudsidan som visar alla todo objekt
 class TodoList extends StatelessWidget {
+  const TodoList({super.key});
+
 
   @override
   Widget build(BuildContext context) {
-    
     var filteredTasks = Provider.of<TodoProvider>(context).getFilteredTasks();
     context.read<TodoProvider>().fetchTodos();
     return Scaffold(
       appBar: AppBar(
-        title: Text('To-Do List'),
-        backgroundColor: Theme.of(context).colorScheme.onPrimary),
-        //visar själva uppgiftslistan
+        title: Text('ToDo List'),
+        centerTitle: true,
+        backgroundColor: Theme.of(context).appBarTheme.backgroundColor),
+        //visar själva uppgiftslistan and returnerar ett todo objekt
         body: ListView.builder(
         itemCount: filteredTasks.length,
         itemBuilder: (context, index) {
@@ -37,9 +39,10 @@ class TodoList extends StatelessWidget {
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
-          //knappen som leder till att lägga till en aktivitet 
+          //knappen som leder till att en sida där man kan lägga till en aktivitet 
           FloatingActionButton(
-            backgroundColor: Colors.white,
+            backgroundColor: Theme.of(context).appBarTheme.backgroundColor,
+            shape: CircleBorder(),
             onPressed: () {
             Navigator.push(
               
@@ -48,19 +51,20 @@ class TodoList extends StatelessWidget {
             );
           }, child: Icon(
             Icons.add,
-            color: Colors.black,
+            color: Theme.of(context).colorScheme.primary,
             ),
           ),
           //Knappen som leder till filtersidan
           FloatingActionButton(
-            backgroundColor: Colors.white,
+            backgroundColor: Theme.of(context).appBarTheme.backgroundColor,
+            shape: CircleBorder(),
             onPressed: () {
             Navigator.push(
               context,
               MaterialPageRoute(builder: (context) => FilterTask()),
             );     
             }, child: Icon(Icons.menu, 
-            color: Colors.black,)
+            color: Theme.of(context).colorScheme.primary,)
           ),
         ],
       ),
@@ -68,14 +72,13 @@ class TodoList extends StatelessWidget {
   }
 }
 
-// Själva _todo widget som representerar Todo som objekt
+// Själva _todo widget som representerar Todo som objekt, samt checkboxen och krysset
  
 
 Widget _todo({required BuildContext context, required TodoItem task, required int index, VoidCallback? onRemove}) {
-  Color textColor = task.done ? Colors.black : Colors.black;
   return Container(
     decoration: BoxDecoration(
-      border: Border(bottom: BorderSide(color: Colors.black, width: 0.5)),
+      border: Border(bottom: BorderSide(color: Theme.of(context).colorScheme.secondary, width: 0.5)),
     ),
     child: Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -83,14 +86,16 @@ Widget _todo({required BuildContext context, required TodoItem task, required in
       children: [
         Padding(
           padding: EdgeInsets.only(right: 5),
-          //själva uin för checkboxen
+          //själva funktionen för checkbox
           child: Checkbox(
-            activeColor: Colors.white,
-            checkColor: Colors.black,
+            activeColor: Theme.of(context).colorScheme.primary,
+            checkColor: Theme.of(context).colorScheme.secondary,
             value: task.done,
             onChanged: (newValue) {
-              Provider.of<TodoProvider>(context, listen: false).toggleTask(task);;
+              Provider.of<TodoProvider>(context, listen: false).toggleTask(task);
             },
+            visualDensity: VisualDensity.compact,
+            side: BorderSide(color: Theme.of(context).colorScheme.secondary)
           ),
         ),
         Expanded(
@@ -102,9 +107,14 @@ Widget _todo({required BuildContext context, required TodoItem task, required in
                 task.title,
                 style: TextStyle(
                   fontSize: 20, 
-                  color: textColor, 
-                  decoration: task.done ? TextDecoration.lineThrough : TextDecoration.none,),
-                
+                  color: task.done
+                  ? Theme.of(context).colorScheme.secondary
+                  : Theme.of(context).colorScheme.secondary,
+                  decoration: task.done ? TextDecoration.lineThrough : TextDecoration.none,
+                  decorationColor: task.done
+                  ? Theme.of(context).colorScheme.secondary
+                  : Theme.of(context).colorScheme.secondary)
+                  ,   
               ),
             ],
           ),
@@ -115,7 +125,7 @@ Widget _todo({required BuildContext context, required TodoItem task, required in
           child: IconButton(
             icon: Icon(
               Icons.close,
-              color: Colors.black),
+              color: Theme.of(context).colorScheme.secondary),
             onPressed: onRemove,
           ),
         ),

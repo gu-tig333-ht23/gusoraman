@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
@@ -44,7 +43,7 @@ class TodoProvider extends ChangeNotifier {
   List<TodoItem> get tasks => _tasks;
   bool _todosFetched = false;
 
-//Det är detta som gör att allt visas
+//Det är detta som gör att allt visas med andra det hämtar lagrad data från APIn
   void fetchTodos() async {
     try {
       if (!_todosFetched) {

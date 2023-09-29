@@ -1,20 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'providers.dart';
+import 'apiproviders.dart';
 
 //Själva sidan för filter
 
 class FilterTask extends StatelessWidget {
+  const FilterTask({super.key});
+
   @override
   Widget build(BuildContext context) {
-    return Theme(
-      data: ThemeData(appBarTheme: 
-      AppBarTheme(
-        backgroundColor: Colors.white,
-        foregroundColor: Colors.black,)),
-      child: Scaffold(
+    return Scaffold(
       appBar: AppBar(
-        title: Text('Filter Tasks'),
+      backgroundColor: Theme.of(context).appBarTheme.backgroundColor,
+      title: Text('ToDo List'),
+      centerTitle: true,
       ),
       body: Center(
         child: Column(
@@ -27,9 +26,11 @@ class FilterTask extends StatelessWidget {
                 Navigator.pop(context);
               },
               style: ElevatedButton.styleFrom(
-              backgroundColor: Colors.black,),
-              child: Text('Show done tasks'),
+              foregroundColor:Theme.of(context).appBarTheme.foregroundColor,
+              backgroundColor: Theme.of(context).appBarTheme.backgroundColor,),
+              child: Text('Show done tasks'),           
             ),
+            SizedBox(height: 15.0),
             ElevatedButton(
               onPressed: () {
                 // Filter för oklara tasks
@@ -37,9 +38,11 @@ class FilterTask extends StatelessWidget {
                 Navigator.pop(context);
               },
               style: ElevatedButton.styleFrom(
-              backgroundColor: Colors.black,),
-              child: Text('Show unfinished tasks'),
+              foregroundColor:Theme.of(context).appBarTheme.foregroundColor,
+              backgroundColor: Theme.of(context).appBarTheme.backgroundColor,),
+              child: Text('Show undone tasks'),
             ),
+            SizedBox(height: 15.0),
             ElevatedButton(
               onPressed: () {
                 // Tar bort filter
@@ -47,13 +50,14 @@ class FilterTask extends StatelessWidget {
                 Navigator.pop(context); 
               },
               style: ElevatedButton.styleFrom(
-              backgroundColor: Colors.black,),
+              foregroundColor:Theme.of(context).appBarTheme.foregroundColor,
+              backgroundColor:Theme.of(context).appBarTheme.backgroundColor),
               child: Text('Show all tasks'),
             ),
+            SizedBox(height: 15.0),
           ],
         ),
       ),
-    ),
-  );
-}
+    );
+  }
 }
