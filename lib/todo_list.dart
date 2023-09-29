@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'add_activity.dart'; 
 import 'package:provider/provider.dart';
 import 'filtertask.dart';
-import 'providers.dart';
+import 'apiproviders.dart';
 
 
 
@@ -12,7 +12,6 @@ class TodoList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    
     var filteredTasks = Provider.of<TodoProvider>(context).getFilteredTasks();
     context.read<TodoProvider>().fetchTodos();
     return Scaffold(
@@ -20,7 +19,7 @@ class TodoList extends StatelessWidget {
         title: Text('ToDo List'),
         centerTitle: true,
         backgroundColor: Theme.of(context).appBarTheme.backgroundColor),
-        //visar själva uppgiftslistan
+        //visar själva uppgiftslistan and returnerar ett todo objekt
         body: ListView.builder(
         itemCount: filteredTasks.length,
         itemBuilder: (context, index) {
@@ -38,7 +37,7 @@ class TodoList extends StatelessWidget {
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
-          //knappen som leder till att lägga till en aktivitet 
+          //knappen som leder till att en sida där man kan lägga till en aktivitet 
           FloatingActionButton(
             backgroundColor: Theme.of(context).appBarTheme.backgroundColor,
             shape: CircleBorder(),
@@ -85,7 +84,7 @@ Widget _todo({required BuildContext context, required TodoItem task, required in
       children: [
         Padding(
           padding: EdgeInsets.only(right: 5),
-          //själva uin för checkboxen
+          //själva funktionen för checkbox
           child: Checkbox(
             activeColor: Theme.of(context).colorScheme.primary,
             checkColor: Theme.of(context).colorScheme.secondary,

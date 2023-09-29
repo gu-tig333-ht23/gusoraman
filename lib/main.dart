@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'todo_list.dart';
-import 'providers.dart';
+import 'apiproviders.dart';
 import 'theme.dart';
 
 
@@ -18,7 +18,7 @@ void main() {
 }
 
 
-// Kommern nog göra om detta och göra themes en egen fil för bättre strukturerard kod
+// Själva klassen för programmet
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
