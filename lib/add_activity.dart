@@ -32,7 +32,7 @@ class AddActivity extends StatelessWidget {
                     border: OutlineInputBorder(borderSide: BorderSide(color: Theme.of(context).colorScheme.secondary)
                     ), 
                     focusedBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: Theme.of(context).colorScheme.secondary), // Customize the focus color here.
+                      borderSide: BorderSide(color: Theme.of(context).colorScheme.secondary),
                       borderRadius: BorderRadius.all(Radius.circular(10.0)),
                       ),
                     hintText: 'What are you going to do',
