@@ -27,18 +27,19 @@ class AddActivity extends StatelessWidget {
                 child: TextFormField(
                   controller: _textEditingController,
                   decoration: InputDecoration(
-                    border: OutlineInputBorder(borderSide: BorderSide(color: Colors.black)
+                    border: OutlineInputBorder(borderSide: BorderSide(color: Theme.of(context).colorScheme.secondary)
                     ), 
                     focusedBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.black), // Customize the focus color here.
+                      borderSide: BorderSide(color: Theme.of(context).colorScheme.secondary), // Customize the focus color here.
                       borderRadius: BorderRadius.all(Radius.circular(10.0)),
                       ),
                     hintText: 'What are you going to do',
                   ),
-                  style: TextStyle(color: Colors.black),
+                  style: TextStyle(color: Theme.of(context).colorScheme.secondary),
                 ),
               ),
             ),
+            // Själva knappen som kommunicerar eller prater med API och programmet om vad todo objektet ska heta samt läggas in
             ElevatedButton(
               onPressed: () async {
                 final String taskName = _textEditingController.text.trim();
@@ -49,8 +50,8 @@ class AddActivity extends StatelessWidget {
             );
               },
               style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.white,
-                foregroundColor: Colors.black,
+                backgroundColor: Theme.of(context).colorScheme.primary,
+                foregroundColor: Theme.of(context).colorScheme.secondary,
               ),
               child: Text("+ Add"),
             )

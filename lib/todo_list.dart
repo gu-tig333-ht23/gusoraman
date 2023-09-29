@@ -76,7 +76,7 @@ class TodoList extends StatelessWidget {
 Widget _todo({required BuildContext context, required TodoItem task, required int index, VoidCallback? onRemove}) {
   return Container(
     decoration: BoxDecoration(
-      border: Border(bottom: BorderSide(color: Colors.black, width: 0.5)),
+      border: Border(bottom: BorderSide(color: Theme.of(context).colorScheme.secondary, width: 0.5)),
     ),
     child: Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
